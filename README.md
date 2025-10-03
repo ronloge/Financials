@@ -1,3 +1,8 @@
+![Version](https://img.shields.io/badge/version-2.1.0-blue)
+![AI Powered](https://img.shields.io/badge/AI-Powered-green)
+![Node.js](https://img.shields.io/badge/Node.js-18+-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
 # Project Financials Consultant Metrics Analyzer - Node.js Edition
 
 ## Overview
