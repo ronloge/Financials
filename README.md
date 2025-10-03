@@ -416,8 +416,41 @@ This Node.js version provides all functionality from the original Python/Streaml
 
 ---
 
-**Version**: 2.0 (Node.js Edition)  
-**Last Updated**: January 2025  
-**Compatibility**: Node.js 14+, Modern Browsers (Chrome, Firefox, Safari, Edge)# Financials
+## 🤖 AI-Powered Git Workflow
+
+### Automated Version Management
+- **AI Commit Analysis** - OpenAI GPT-4o-mini analyzes code changes and generates intelligent commit messages
+- **Automatic Version Bumping** - Smart semantic versioning based on change analysis (patch/minor/major)
+- **Changelog Generation** - AI-generated changelog entries with detailed change descriptions
+- **Release Notes Creation** - Comprehensive release notes with installation instructions
+- **README Updates** - Automatic documentation updates when code changes warrant it
+- **GitHub Integration** - Seamless push to repository with enhanced commit messages
+
+### AI Analysis Features
+- **File Content Analysis** - Reviews actual code changes, not just diff summaries
+- **Project Context Awareness** - Understands project structure and purpose
+- **Intelligent Versioning** - Determines appropriate version increments based on change impact
+- **Documentation Sync** - Keeps README, changelog, and release notes in sync
+- **Fallback Handling** - Graceful degradation when AI services are unavailable
+
+### Usage
+```powershell
+# Run AI-powered Git workflow
+.\ai-commit.ps1
+```
+
+The AI will:
+1. Analyze your staged changes
+2. Generate appropriate commit message
+3. Determine new version number
+4. Update package.json, CHANGELOG.md, and RELEASE_NOTES.md
+5. Commit and push to GitHub automatically
+
+---
+
+**Version**: 2.1.2 (AI-Enhanced Node.js Edition)  
+**Last Updated**: October 2025  
+**Compatibility**: Node.js 14+, Modern Browsers (Chrome, Firefox, Safari, Edge)  
+**AI Integration**: OpenAI GPT-4o-mini for automated Git workflow management
 
 

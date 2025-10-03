@@ -5,7 +5,7 @@
 
 ## What's New
 
-This release addresses minor documentation updates to improve the user experience.
+This release includes significant updates to the README file, providing additional information on functionality, usage, and recent changes.
 
 ## Installation
 
@@ -16,7 +16,7 @@ npm start
 
 ## Changelog
 
-Modified instructions for installation to enhance user understanding
+Enhanced documentation with new features and clearer instructions.
 
 ---
 
