@@ -43,3 +43,4 @@ output/
 .idea/
 *.swp
 *.swo
+*.ps1
