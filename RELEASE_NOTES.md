@@ -5,7 +5,7 @@
 
 ## What's New
 
-This release includes significant updates to the README file, providing additional information on functionality, usage, and recent changes.
+A new test file has been added to validate the enhanced AI analysis for better commit messages.
 
 ## Installation
 
@@ -16,7 +16,7 @@ npm start
 
 ## Changelog
 
-Enhanced documentation with new features and clearer instructions.
+Introduced a new test file to evaluate AI capabilities in understanding file content.
 
 ---
 

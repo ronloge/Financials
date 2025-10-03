@@ -1,0 +1,2 @@
+Testing enhanced AI analysis with file content review.
+This file tests whether AI can read actual file contents and provide better commit messages.

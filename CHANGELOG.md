@@ -1,5 +1,9 @@
 ## [2.1.2] - 2025-10-03
 
+- Introduced a new test file to evaluate AI capabilities in understanding file content.
+
+## [2.1.2] - 2025-10-03
+
 - Enhanced documentation with new features and clearer instructions.
 
 ## [2.1.2] - 2025-10-03
@@ -97,6 +101,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 📊 Basic consultant metrics analysis
 - 📈 Performance tracking and reporting
 - 📁 Excel file processing capabilities
+
 
 
 
