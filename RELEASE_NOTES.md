@@ -5,7 +5,7 @@
 
 ## What's New
 
-This release includes important updates and optimizations.
+This release addresses minor documentation updates to improve the user experience.
 
 ## Installation
 
@@ -16,7 +16,7 @@ npm start
 
 ## Changelog
 
-Added new features and fixed several bugs.
+Modified instructions for installation to enhance user understanding
 
 ---
 
