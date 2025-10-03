@@ -1,3 +1,17 @@
+## [1.0.2] - 2025-10-03
+
+### Changed
+- Updated .gitignore and fixed PowerShell script
+- Updated version to 1.0.2
+- Automated version bump via AI Git Analysis
+
+## [1.0.1] - 2025-10-03
+
+### Changed
+- Updated .gitignore and fixed PowerShell script
+- Updated version to 1.0.1
+- Automated version bump via AI Git Analysis
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
@@ -54,3 +68,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 📊 Basic consultant metrics analysis
 - 📈 Performance tracking and reporting
 - 📁 Excel file processing capabilities
+
