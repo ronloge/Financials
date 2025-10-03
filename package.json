@@ -1,6 +1,6 @@
 {
     "name":  "consultant-metrics-analyzer",
-    "version":  "2.1.1",
+    "version":  "2.1.2",
     "description":  "Project Financials Consultant Metrics Analyzer - Web Application",
     "main":  "server.js",
     "scripts":  {
