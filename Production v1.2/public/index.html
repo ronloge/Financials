@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Consultant Metrics Analyzer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div class="container-fluid px-4">
+            <div class="d-flex align-items-center">
+                <img src="https://marcom.netsyncnetwork.com/logos/netsync_bug-white.svg" alt="NetSync Bug" height="45" class="me-2">
+                <img src="https://marcom.netsyncnetwork.com/logos/netsync-white.svg" alt="NetSync" height="45" class="me-4">
+                <span class="navbar-brand mb-0 text-white" style="font-size: 1.4rem; font-weight: 600; letter-spacing: -0.025em;">📊 Project Financials Consultant Metrics Analyzer</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid" style="background: #f8fafc; min-height: 100vh; padding-top: 2rem;">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="card" style="border: none; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 12px;">
+                    <div class="card-header" style="cursor: pointer; background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: white; border-radius: 12px 12px 0 0; border: none;" data-bs-toggle="collapse" data-bs-target="#configPanel">
+                        <h5 class="mb-0" style="font-weight: 600;"><i class="fas fa-cog me-2"></i>Configuration <i class="fas fa-chevron-up float-end" id="configToggle"></i></h5>
+                    </div>
+                    <div class="card-body collapse show" id="configPanel" style="background: white;">
+                        <!-- Data Source Selection -->
+                        <div class="mb-3">
+                            <h6>📁 Data Source</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="dataSource" id="uploadFile" value="upload" checked>
+                                <label class="form-check-label" for="uploadFile">📁 Upload Excel File</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="dataSource" id="connectSSRS" value="ssrs">
+                                <label class="form-check-label" for="connectSSRS">🌐 Connect to SSRS Report</label>
+                            </div>
+                        </div>
+
+                        <!-- File Upload Section -->
+                        <div id="fileUploadSection" class="mb-3">
+                            <label for="excelFile" class="form-label">Upload Excel File(s)</label>
+                            <input type="file" class="form-control" id="excelFile" accept=".xlsx,.xls" multiple>
+                            <div class="form-text" id="fileUploadHelp">Select single file for current analysis</div>
+                        </div>
+
+                        <!-- SSRS Connection Section -->
+                        <div id="ssrsSection" class="mb-3" style="display: none;">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="sqlServer" class="form-label">Server</label>
+                                    <input type="text" class="form-control" id="sqlServer" value="NSSQL1601.netsync.com">
+                                </div>
+                                <div class="col-6">
+                                    <label for="sqlDatabase" class="form-label">Database</label>
+                                    <input type="text" class="form-control" id="sqlDatabase" value="DWPROD">
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="authType" id="windowsAuth" value="windows" checked>
+                                    <label class="form-check-label" for="windowsAuth">Windows Authentication</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="authType" id="sqlAuth" value="sql">
+                                    <label class="form-check-label" for="sqlAuth">SQL Server Authentication</label>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-6">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="username">
+                                </div>
+                                <div class="col-6">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password">
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm mt-2" id="connectSQL">🔗 Connect to SQL Server</button>
+                        </div>
+
+                        <!-- Config File Upload -->
+                        <div class="mb-3">
+                            <label for="configFile" class="form-label">Upload Config File (Optional)</label>
+                            <div class="input-group">
+                                <input type="file" class="form-control" id="configFile" accept=".json">
+                                <button class="btn btn-outline-primary" type="button" id="applyConfig">Apply</button>
+                            </div>
+                        </div>
+
+                        <!-- Exclusions Management -->
+                        <div class="mb-3">
+                            <h6>🚫 Manage Exclusions</h6>
+                            <button class="btn btn-sm btn-outline-info" id="viewExclusions">View Current Exclusions</button>
+                        </div>
+
+                        <!-- Filter Files -->
+                        <div class="mb-3">
+                            <h6>📋 Filter Files (Optional)</h6>
+                            <div class="mb-2">
+                                <label for="engineersFile" class="form-label">Engineers List</label>
+                                <input type="file" class="form-control mb-1" id="engineersFile" accept=".txt">
+                                <textarea class="form-control" id="engineersText" rows="2" placeholder="Or enter names here (one per line)&#10;Example: John Smith&#10;Jane Doe"></textarea>
+                            </div>
+                            <div class="mb-2">
+                                <label for="excludeFile" class="form-label">Exclusions</label>
+                                <input type="file" class="form-control mb-1" id="excludeFile" accept=".csv">
+                                <textarea class="form-control" id="exclusionsText" rows="2" placeholder="Or enter exclusions (Name,Job Number)&#10;Example: John Smith,12345&#10;Jane Doe,67890"></textarea>
+                            </div>
+                            <div class="mb-2">
+                                <label for="saFile" class="form-label">Solution Architects</label>
+                                <input type="file" class="form-control mb-1" id="saFile" accept=".txt">
+                                <textarea class="form-control" id="saText" rows="2" placeholder="Or enter names here (one per line)&#10;Example: Sarah Wilson&#10;Tom Anderson"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Thresholds -->
+                        <div class="mb-3">
+                            <h6>📊 Thresholds</h6>
+                            <div class="mb-2">
+                                <label for="efficiencyThreshold" class="form-label">Efficiency Threshold</label>
+                                <input type="range" class="form-range" id="efficiencyThreshold" min="0" max="1" step="0.01" value="0.15">
+                                <small class="text-muted">15%</small>
+                            </div>
+                            <div class="mb-2">
+                                <label for="successThreshold" class="form-label">Success Threshold</label>
+                                <input type="range" class="form-range" id="successThreshold" min="0" max="1" step="0.01" value="0.3">
+                                <small class="text-muted">30%</small>
+                            </div>
+                        </div>
+
+                        <!-- Color Thresholds -->
+                        <div class="mb-3">
+                            <h6>🎨 Color Thresholds</h6>
+                            <div class="mb-2">
+                                <label for="greenThreshold" class="form-label">Green (Under Budget)</label>
+                                <input type="range" class="form-range" id="greenThreshold" min="-0.5" max="0" step="0.01" value="-0.1">
+                                <small class="text-muted">-10%</small>
+                            </div>
+                            <div class="mb-2">
+                                <label for="yellowThreshold" class="form-label">Yellow (Over Budget)</label>
+                                <input type="range" class="form-range" id="yellowThreshold" min="0" max="0.5" step="0.01" value="0.1">
+                                <small class="text-muted">10%</small>
+                            </div>
+                            <div class="mb-2">
+                                <label for="redThreshold" class="form-label">Red (Failed)</label>
+                                <input type="range" class="form-range" id="redThreshold" min="0" max="1" step="0.01" value="0.3">
+                                <small class="text-muted">30%</small>
+                            </div>
+                        </div>
+
+                        <!-- Trending Analysis -->
+                        <div class="mb-3">
+                            <h6>📈 Trending Analysis</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="enableTrending">
+                                <label class="form-check-label" for="enableTrending">Enable Multi-File Trending</label>
+                            </div>
+                        </div>
+
+                        <!-- Date Filtering -->
+                        <div class="mb-3">
+                            <h6>📅 Date Filtering</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="enableDateFilter">
+                                <label class="form-check-label" for="enableDateFilter">Enable Date Filter</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Auto Refresh -->
+                        <div class="mb-3">
+                            <h6>🔄 Auto Refresh</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="enableAutoRefresh">
+                                <label class="form-check-label" for="enableAutoRefresh">Auto Refresh (5 min)</label>
+                            </div>
+                            <div id="dateFilterOptions" style="display: none;">
+                                <div class="mt-2">
+                                    <input type="radio" name="filterType" value="days" id="filterDays" checked>
+                                    <label for="filterDays">Days from Today</label>
+                                    <input type="number" class="form-control form-control-sm mt-1" id="daysFromToday" value="365">
+                                </div>
+                                <div class="mt-2">
+                                    <input type="radio" name="filterType" value="date" id="filterDate">
+                                    <label for="filterDate">Specific Date</label>
+                                    <input type="date" class="form-control form-control-sm mt-1" id="specificDate">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary w-100" id="runAnalysis">🚀 Run Analysis</button>
+                        <button class="btn btn-outline-secondary w-100 mt-2" id="exportResults" disabled>📊 Export Results</button>
+                        <button class="btn btn-outline-info w-100 mt-2" id="refreshConfig">🔄 Reload Config</button>
+                    </div>
+                </div>
+
+                <!-- Date Range Display -->
+                <div class="card mt-3" style="border: none; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 12px;">
+                    <div class="card-body" style="background: white; border-radius: 12px;">
+                        <h6 class="text-primary" style="font-weight: 600;">📅 Current Date Range</h6>
+                        <p id="dateRangeInfo" class="text-muted mb-0">No date filtering active</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <!-- Tabs -->
+                <ul class="nav nav-tabs" id="mainTabs" style="border-bottom: 2px solid #e5e7eb; margin-bottom: 0;">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#dashboard" style="color: #1e40af; font-weight: 600; border: none; border-bottom: 3px solid #3b82f6; background: white;">📈 Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#consultants">👥 Consultants</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#solutionArchitects">🏗️ Solution Architects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#customers">🏢 Customers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#das">📊 DAS+ Analysis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#combinations">🤝 Team Analysis</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content mt-3">
+                    <!-- Dashboard Tab -->
+                    <div class="tab-pane fade show active" id="dashboard">
+                        <div class="row" id="metricsCards">
+                            <div class="col-md-3 mb-4">
+                                <div class="card text-center h-100" style="border: none; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); border-radius: 12px; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                                    <div class="card-body" style="background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%); color: white; border-radius: 12px;">
+                                        <h5 class="card-title" style="font-weight: 600; opacity: 0.9;">Team Size</h5>
+                                        <div id="totalConsultants" style="font-size: 2rem; font-weight: 700;">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-4">
+                                <div class="card text-center h-100" style="border: none; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); border-radius: 12px; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                                    <div class="card-body" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border-radius: 12px;">
+                                        <h5 class="card-title" style="font-weight: 600; opacity: 0.9;">Total Hours</h5>
+                                        <div id="totalHours" style="font-size: 2rem; font-weight: 700;">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-4">
+                                <div class="card text-center h-100" style="border: none; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); border-radius: 12px; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                                    <div class="card-body" style="background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); color: white; border-radius: 12px;">
+                                        <h5 class="card-title" style="font-weight: 600; opacity: 0.9;">Avg Efficiency</h5>
+                                        <div id="avgEfficiency" style="font-size: 2rem; font-weight: 700;">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-4">
+                                <div class="card text-center h-100" style="border: none; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); border-radius: 12px; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                                    <div class="card-body" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; border-radius: 12px;">
+                                        <h5 class="card-title" style="font-weight: 600; opacity: 0.9;">Total Projects</h5>
+                                        <div id="totalProjects" style="font-size: 2rem; font-weight: 700;">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <canvas id="performanceChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Consultants Tab -->
+                    <div class="tab-pane fade" id="consultants">
+                        <div class="card" style="border: none; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); border-radius: 12px; margin-top: 1rem;">
+                            <div class="card-header" style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: white; border-radius: 12px 12px 0 0; border: none;">
+                                <h5 class="mb-0" style="font-weight: 600;">👥 Consultant Performance Analysis</h5>
+                            </div>
+                            <div class="card-body" style="background: white; border-radius: 0 0 12px 12px;">
+                                <div class="table-responsive">
+                                    <table class="table table-striped sortable-table" id="consultantsTable">
+                                        <thead>
+                                            <tr>
+                                                <th class="sortable" data-sort="name">Consultant ↕</th>
+                                                <th class="sortable" data-sort="projects">Projects ↕</th>
+                                                <th class="sortable" data-sort="hours">Hours ↕</th>
+                                                <th class="sortable" data-sort="efficiencyScore">Efficiency % ↕</th>
+                                                <th class="sortable" data-sort="successRate">Goal Attainment % ↕</th>
+                                                <th class="sortable" data-sort="withinBudget">Within Budget ↕</th>
+                                                <th class="sortable" data-sort="overBudget">Over Budget ↕</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Solution Architects Tab -->
+                    <div class="tab-pane fade" id="solutionArchitects">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>🏗️ Solution Architect Performance</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted">Solution Architect analysis will be displayed here.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Customers Tab -->
+                    <div class="tab-pane fade" id="customers">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>🏢 Customer Performance Analysis</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted">Customer analysis will be displayed here.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DAS+ Tab -->
+                    <div class="tab-pane fade" id="das">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>📊 DAS+ (Delivery Accuracy Score Plus) Analysis</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted">DAS+ analysis will be displayed here.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Analysis Tab -->
+                    <div class="tab-pane fade" id="combinations">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>🤝 Team Combination Analysis</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted">Team analysis will be displayed here.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
