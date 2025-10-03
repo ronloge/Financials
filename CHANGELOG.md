@@ -1,3 +1,7 @@
+## [2.3.0] - 2025-10-03
+
+- Updated index.html for better layout, improved script.js with new functionalities, and made minor adjustments in server.js.
+
 ## [2.2.0] - 2025-10-03
 
 - Added functionality to fetch and display exclusions for consultants in the project export.
@@ -109,6 +113,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 📊 Basic consultant metrics analysis
 - 📈 Performance tracking and reporting
 - 📁 Excel file processing capabilities
+
 
 
 

@@ -1,11 +1,11 @@
-# Release Notes - v2.2.0
+# Release Notes - v2.3.0
 
 **Release Date:** 2025-10-03
-**Version:** 2.2.0
+**Version:** 2.3.0
 
 ## What's New
 
-The export feature for consultant projects now includes a section for excluded projects, providing insights into projects that were not considered in the analysis.
+This release introduces enhancements to the user interface and additional features in the script, improving overall functionality and user experience.
 
 ## Installation
 
@@ -16,7 +16,7 @@ npm start
 
 ## Changelog
 
-Added functionality to fetch and display exclusions for consultants in the project export.
+Updated index.html for better layout, improved script.js with new functionalities, and made minor adjustments in server.js.
 
 ---
 

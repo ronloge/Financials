@@ -49,6 +49,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+app.get('/package.json', (req, res) => {
+  res.sendFile(path.join(__dirname, 'package.json'));
+});
+
 app.post('/analyze', (req, res) => {
   try {
     log('info', 'Direct analysis request received');

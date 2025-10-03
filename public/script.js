@@ -13,6 +13,7 @@ function sanitizeHtml(str) {
 document.addEventListener('DOMContentLoaded', function() {
     setupEventListeners();
     loadExistingConfig();
+    loadAppVersion();
     updateDateRangeDisplay();
     enableExportButtons(false); // Initially disable export buttons
     
@@ -2378,6 +2379,19 @@ async function exportConsultantProjects(consultantName, projects, format, consul
         showMessage(`Projects exported successfully!`, 'success');
     } catch (error) {
         showMessage(`Export failed: ${error.message}`, 'error');
+    }
+}
+
+async function loadAppVersion() {
+    try {
+        const response = await fetch('/package.json');
+        const packageData = await response.json();
+        const versionEl = document.getElementById('appVersion');
+        if (versionEl && packageData.version) {
+            versionEl.textContent = `v${packageData.version}`;
+        }
+    } catch (error) {
+        console.log('Could not load version');
     }
 }
 
