@@ -5,7 +5,7 @@
 
 ## What's New
 
-General updates and improvements
+This release includes important updates and optimizations.
 
 ## Installation
 
@@ -16,7 +16,7 @@ npm start
 
 ## Changelog
 
-General updates
+Added new features and fixed several bugs.
 
 ---
 
