@@ -1499,7 +1499,9 @@ function generateXLSX(data, tab) {
       break;
       
     case 'consultant-projects':
-      worksheet = XLSX.utils.json_to_sheet(data);
+      // Create worksheet without headers, then add data
+      const wsData = data.map(row => Object.values(row));
+      worksheet = XLSX.utils.aoa_to_sheet(wsData);
       break;
       
     default:

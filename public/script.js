@@ -2282,6 +2282,16 @@ async function exportConsultantProjects(consultantName, projects, format, consul
                 'Complete %': '',
                 'Status': ''
             },
+            {
+                'Job Number': 'Job Number',
+                'Description': 'Description',
+                'Customer': 'Customer',
+                'Budget Hours': 'Budget Hours',
+                'Actual Hours': 'Actual Hours',
+                'Variance %': 'Variance %',
+                'Complete %': 'Complete %',
+                'Status': 'Status'
+            },
             ...projects.map(project => ({
                 'Job Number': project.jobNumber,
                 'Description': project.description,

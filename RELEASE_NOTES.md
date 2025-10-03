@@ -5,7 +5,7 @@
 
 ## What's New
 
-A new test file has been added to validate the enhanced AI analysis for better commit messages.
+General updates and improvements
 
 ## Installation
 
@@ -16,7 +16,7 @@ npm start
 
 ## Changelog
 
-Introduced a new test file to evaluate AI capabilities in understanding file content.
+Enhanced project data export feature by adding comprehensive headers and optimizing the worksheet creation process for better flexibility.
 
 ---
 
