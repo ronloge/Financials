@@ -1,3 +1,7 @@
+## [2.2.0] - 2025-10-03
+
+- Added functionality to fetch and display exclusions for consultants in the project export.
+
 ## [2.1.2] - 2025-10-03
 
 - Enhanced project data export feature by adding comprehensive headers and optimizing the worksheet creation process for better flexibility.
@@ -105,6 +109,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 📊 Basic consultant metrics analysis
 - 📈 Performance tracking and reporting
 - 📁 Excel file processing capabilities
+
 
 
 

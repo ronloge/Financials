@@ -1,11 +1,11 @@
-# Release Notes - v2.1.2
+# Release Notes - v2.2.0
 
 **Release Date:** 2025-10-03
-**Version:** 2.1.2
+**Version:** 2.2.0
 
 ## What's New
 
-General updates and improvements
+The export feature for consultant projects now includes a section for excluded projects, providing insights into projects that were not considered in the analysis.
 
 ## Installation
 
@@ -16,7 +16,7 @@ npm start
 
 ## Changelog
 
-Enhanced project data export feature by adding comprehensive headers and optimizing the worksheet creation process for better flexibility.
+Added functionality to fetch and display exclusions for consultants in the project export.
 
 ---
 

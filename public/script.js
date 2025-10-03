@@ -2261,6 +2261,13 @@ function showSAConsultantProjects(sa, consultant) {
 
 async function exportConsultantProjects(consultantName, projects, format, consultant) {
     try {
+        // Fetch exclusions for this consultant
+        const exclusionsResponse = await fetch('/exclusions');
+        const allExclusions = await exclusionsResponse.json();
+        const consultantExclusions = allExclusions.filter(excl => 
+            excl.consultant.toLowerCase().trim() === consultantName.toLowerCase().trim()
+        );
+        
         const data = [
             {
                 'Job Number': 'SUMMARY',
@@ -2303,6 +2310,52 @@ async function exportConsultantProjects(consultantName, projects, format, consul
                 'Status': project.status
             }))
         ];
+        
+        // Add exclusions section if any exist
+        if (consultantExclusions.length > 0) {
+            data.push(
+                {
+                    'Job Number': '',
+                    'Description': '',
+                    'Customer': '',
+                    'Budget Hours': '',
+                    'Actual Hours': '',
+                    'Variance %': '',
+                    'Complete %': '',
+                    'Status': ''
+                },
+                {
+                    'Job Number': 'EXCLUDED PROJECTS',
+                    'Description': 'Projects excluded from analysis',
+                    'Customer': '',
+                    'Budget Hours': '',
+                    'Actual Hours': '',
+                    'Variance %': '',
+                    'Complete %': '',
+                    'Status': ''
+                },
+                {
+                    'Job Number': 'Job Number',
+                    'Description': 'Exclusion Reason',
+                    'Customer': '',
+                    'Budget Hours': '',
+                    'Actual Hours': '',
+                    'Variance %': '',
+                    'Complete %': '',
+                    'Status': ''
+                },
+                ...consultantExclusions.map(excl => ({
+                    'Job Number': excl.project,
+                    'Description': excl.reason || 'No reason provided',
+                    'Customer': '',
+                    'Budget Hours': '',
+                    'Actual Hours': '',
+                    'Variance %': '',
+                    'Complete %': '',
+                    'Status': ''
+                }))
+            );
+        }
         
         const response = await fetch('/export', {
             method: 'POST',
