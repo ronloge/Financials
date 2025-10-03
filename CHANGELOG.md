@@ -1,3 +1,7 @@
+## [2.1.1] - 2025-10-03
+
+- General updates
+
 ## [1.1.0] - 2025-10-03
 
 - Add real AI analysis to Git workflow
@@ -73,5 +77,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 📊 Basic consultant metrics analysis
 - 📈 Performance tracking and reporting
 - 📁 Excel file processing capabilities
+
 
 
