@@ -1,11 +1,11 @@
-# Release Notes - v2.3.0
+# Release Notes - v2.4.0
 
 **Release Date:** 2025-10-03
-**Version:** 2.3.0
+**Version:** 2.4.0
 
 ## What's New
 
-This release introduces enhancements to the user interface and additional features in the script, improving overall functionality and user experience.
+This update enhances the .gitignore file by adding more exclusions for files and directories that should not be tracked by Git, improving project cleanliness.
 
 ## Installation
 
@@ -16,7 +16,7 @@ npm start
 
 ## Changelog
 
-Updated index.html for better layout, improved script.js with new functionalities, and made minor adjustments in server.js.
+Added new file and directory exclusions to .gitignore
 
 ---
 

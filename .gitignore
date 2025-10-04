@@ -30,6 +30,8 @@ exclusions.csv
 disqualified.txt
 engineers.txt
 solution_architects.txt
+Engineers_PM_actual.txt
+Solution_Architects.txt
 
 # OS generated files
 .DS_Store
@@ -43,4 +45,27 @@ output/
 .idea/
 *.swp
 *.swo
+
+# Git automation scripts (not part of the app)
+*.ps1
+*.bat
+
+# Backup and archive files
+backup/
+Production/
+Production v1.2/
+*.zip
+
+# Test files
+test-*.txt
+test-*.js
+
+# Exclude files
+exclude_fix.js
+
+# Other non-app files
+frog_ascii.txt
+olap_connection_info.json
+EXPORT_FEATURES.md
+README_NODEJS.md
 *.ps1
