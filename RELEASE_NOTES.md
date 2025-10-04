@@ -1,11 +1,11 @@
-# Release Notes - v2.4.0
+# Release Notes - v2.5.0
 
 **Release Date:** 2025-10-03
-**Version:** 2.4.0
+**Version:** 2.5.0
 
 ## What's New
 
-This update enhances the .gitignore file by adding more exclusions for files and directories that should not be tracked by Git, improving project cleanliness.
+This release enhances the .gitignore file by adding exclusions for Python files, improving the project's file management.
 
 ## Installation
 
@@ -16,7 +16,7 @@ npm start
 
 ## Changelog
 
-Added new file and directory exclusions to .gitignore
+Added Python file exclusions to .gitignore.
 
 ---
 

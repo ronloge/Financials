@@ -63,9 +63,14 @@ test-*.js
 # Exclude files
 exclude_fix.js
 
+# Python files (old Streamlit version)
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+
 # Other non-app files
 frog_ascii.txt
 olap_connection_info.json
 EXPORT_FEATURES.md
 README_NODEJS.md
-*.ps1

@@ -1,3 +1,7 @@
+## [2.5.0] - 2025-10-03
+
+- Added Python file exclusions to .gitignore.
+
 ## [2.4.0] - 2025-10-03
 
 - Added new file and directory exclusions to .gitignore
@@ -117,6 +121,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 📊 Basic consultant metrics analysis
 - 📈 Performance tracking and reporting
 - 📁 Excel file processing capabilities
+
 
 
 
